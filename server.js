@@ -105,4 +105,4 @@ mongoose.connect(
     console.log(" database connected");
   }
 );
-app.listen(serverConfig.port, console.log(`Listening on port ${serverConfig.port}`));
+app.listen(serverConfig.port, console.log(`Listening on port ${serverConfig.port}. This is from the new server`));
