@@ -19,7 +19,7 @@ if(serverConfig.environment === "production"){
   //middlewares
   app.use(
     cors({
-      origin: "https://medically.netlify.app",
+      origin: "https://serene-babbage-bf33f2.netlify.app",
       credentials: true,
     })
   );
