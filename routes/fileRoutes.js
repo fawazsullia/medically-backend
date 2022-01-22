@@ -18,6 +18,8 @@ cloudinary.config({
 router.post("/upload/:fileName", async (req, res) => {
 
   const { fileName } = req.params;
+  console.log(req.files)
+  const file = req.files[fileName]
   const newFileName = nanoid(5) + fileName
   let pa = path.join(__dirname, "..\\", "uploads\\", newFileName);
   file.mv(pa, (err) => {
@@ -32,7 +34,7 @@ router.post("/upload/:fileName", async (req, res) => {
 
 router.post("/data", async (req, res) => {
   const { patientId, fileName, uploadTitle } = req.body;
-
+ console.log(fileName)
   const data = {
     patientId: patientId,
     uploads: [

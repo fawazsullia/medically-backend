@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const uploadFileSchema = new mongoose.Schema({
 
     uploadTitle : String,
-    __filename : String,
+    fileName : String,
     uploadDate : Date
     
     })
