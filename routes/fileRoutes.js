@@ -16,36 +16,29 @@ cloudinary.config({
 
 //* upload file route
 router.post("/upload/:fileName", async (req, res) => {
-  const { fileName } = req.params;
-  const file = req.files[fileName];
 
-  let pa = path.join(__dirname, "..\\", "uploads\\", fileName);
+  const { fileName } = req.params;
+  const newFileName = nanoid(5) + fileName
+  let pa = path.join(__dirname, "..\\", "uploads\\", newFileName);
   file.mv(pa, (err) => {
     if (err) {
       res.status(500).json({ message: "Something went wrong" }).end();
     } else {
-      cloudinary.uploader.upload(`${pa}`, function (error, result) {
-        if (error) {
-          res.status(500).json({ message: "something went wrong" }).end();
-        } else {
-          res.status(200).json({ downloadUrl: result.secure_url }).end();
-        }
-      });
-    }
-  });
-});
+      res.status(200).json({fileName : newFileName}).end()
+}});
+  })
 
 //* data associated with the upload
 
 router.post("/data", async (req, res) => {
-  const { patientId, downloadUrl, uploadTitle } = req.body;
+  const { patientId, fileName, uploadTitle } = req.body;
 
   const data = {
     patientId: patientId,
     uploads: [
       {
         uploadTitle: uploadTitle,
-        downloadUrl: downloadUrl,
+        fileName: fileName,
         uploadDate: new Date(),
       },
     ],
